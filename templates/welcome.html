@@ -32,5 +32,11 @@
     </ul>
     {%endwith%}
 
+    <div style="display: flex; flex-direction: column; align-items: flex-start; flex-wrap: wrap;">
+        <h4>Clubs and their points :</h4>
+        {% for club in clubs %}
+        <p>{{club['name']}} {{club['points']}}</p>
+        {% endfor %}
+    </div>
 </body>
 </html>

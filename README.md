@@ -29,6 +29,7 @@ flask run
 Rendez-vous ensuite sur votre navigateur à l'adresse suivante :
 ```
 http://127.0.0.1:5000
+```
 Pour effectuer les tests à l'aide de pytest
 Sous Unix/MacOS
 ```
@@ -52,4 +53,3 @@ Windows :
 ```
 python -m locust
 ```
-Vous êtez prêt !

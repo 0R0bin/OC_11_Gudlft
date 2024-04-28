@@ -42,6 +42,8 @@ python -m pytest .\tests\
 Pour avoir la couverture de test
 ```
 coverage run -m pytest tests
+```
+```
 coverage report
 ```
 Pour lancer locust, avec le serveur Flask lancé exécutez la commande suivante

@@ -3,7 +3,7 @@ from app import app
 
 class TestBugBook12:
     client = app.test_client()
-    competition = [
+    competitions = [
         {
             "name": "Competition Test",
             "date": "2024-04-28 18:00:00",
@@ -19,7 +19,7 @@ class TestBugBook12:
         }
     ]
 
-    places_booked = {
+    count_places = {
         "Test club": 
         {
             'Competition Test': 
@@ -33,9 +33,9 @@ class TestBugBook12:
         """
         Replace DB Informations
         """
-        personnal_app.competitions = self.competition
+        personnal_app.competitions = self.competitions
         personnal_app.clubs = self.club
-        personnal_app.count_places = self.places_booked
+        personnal_app.count_places = self.count_places
 
     def test_book_ok(self):
         """
@@ -47,7 +47,7 @@ class TestBugBook12:
             data={
                 "places": 1,
                 "club": self.club[0]["name"],
-                "competition": self.competition[0]["name"]
+                "competition": self.competitions[0]["name"]
             }
         )
 
@@ -63,7 +63,7 @@ class TestBugBook12:
             data={
                 "places": 13,
                 "club": self.club[0]["name"],
-                "competition": self.competition[0]["name"]
+                "competition": self.competitions[0]["name"]
             }
         )
 
@@ -79,7 +79,7 @@ class TestBugBook12:
             data={
                 "places": 3,
                 "club": self.club[0]["name"],
-                "competition": self.competition[0]["name"]
+                "competition": self.competitions[0]["name"]
             }
         )
 

@@ -4,7 +4,7 @@ from app import app
 
 class TestBugPointsUpdateDisplayed:
     client = app.test_client()
-    competition = [
+    competitions = [
         {
             "name": "Competition Test",
             "date": "2024-04-28 18:00:00",
@@ -24,7 +24,7 @@ class TestBugPointsUpdateDisplayed:
         """
         Replace DB Informations
         """
-        personnal_app.competitions = self.competition
+        personnal_app.competitions = self.competitions
         personnal_app.clubs = self.club
 
     def test_points_changed(self):
@@ -39,7 +39,7 @@ class TestBugPointsUpdateDisplayed:
             data={
                 "places": nb_bookings,
                 "club": self.club[0]["name"],
-                "competition": self.competition[0]["name"]
+                "competition": self.competitions[0]["name"]
             }
         )
 

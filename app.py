@@ -57,17 +57,24 @@ def purchasePlaces():
     competition = [c for c in competitions if c['name'] == request.form['competition']][0]
     club = [c for c in clubs if c['name'] == request.form['club']][0]
     placesRequired = int(request.form['places'])
+    # Check Date
     date_time_competition = datetime.strptime(competition['date'], "%Y-%m-%d %H:%M:%S")
     now = datetime.now()
 
     if date_time_competition < now:
         flash('You can\'t book places on a past event.')
         return render_template('booking.html', club=club, competition=competition), 400
-    else:
-        competition['numberOfPlaces'] = int(competition['numberOfPlaces'])-placesRequired
-        club['points'] = int(club['points']) - placesRequired
-        flash('Great-booking complete!')
-        return render_template('welcome.html', club=club, competitions=competitions)
+
+    # Check nb points
+    if placesRequired > int(club['points']):
+        flash(f"Vous ne pouvez pas utiliser des points que vous n'avez pas ! Vous avez essayé de commander {placesRequired} places alors que vous n'aviez que {club['points']} points.")
+        return render_template('welcome.html', club=club, competitions=competitions), 400
+
+    # Retour OK
+    competition['numberOfPlaces'] = int(competition['numberOfPlaces'])-placesRequired
+    club['points'] = int(club['points']) - placesRequired # Display
+    flash('Great-booking complete!')
+    return render_template('welcome.html', club=club, competitions=competitions)
 
 
 # TODO: Add route for points display

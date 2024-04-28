@@ -48,7 +48,7 @@ def purchasePlaces():
     placesRequired = int(request.form['places'])
     if placesRequired > int(club['points']):
         flash(f"Vous ne pouvez pas utiliser des points que vous n'avez pas ! Vous avez essayé de commander {placesRequired} places alors que vous n'aviez que {club['points']} points.")
-        return render_template('welcome.html', club=club, competitions=competitions)
+        return render_template('welcome.html', club=club, competitions=competitions), 400
     else:
         competition['numberOfPlaces'] = int(competition['numberOfPlaces'])-placesRequired
         flash('Great-booking complete!')

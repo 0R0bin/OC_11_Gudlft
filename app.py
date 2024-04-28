@@ -78,7 +78,6 @@ def purchasePlaces():
         return render_template('booking.html', club=club, competition=competition), 400
     else:
         count_places[club['name']][competition['name']]['places'] = places_already_booked + placesRequired
-    
 
     # Check Date
     date_time_competition = datetime.strptime(competition['date'], "%Y-%m-%d %H:%M:%S")

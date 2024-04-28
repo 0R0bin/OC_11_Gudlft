@@ -26,13 +26,17 @@ def index():
 
 @app.route('/showSummary',methods=['POST'])
 def showSummary():
+    if request.form['email'] == '':
+        flash('Merci d\'entrer un mail', category='error')
+        return render_template('index.html'), 400
+
     club = [club for club in clubs if club['email'] == request.form['email']]
 
     if len(club) != 0:
         club = club[0]
     else:
         flash('Mail incorrect', category='error')
-        return render_template('index.html')
+        return render_template('index.html'), 401
     return render_template('welcome.html', club=club, competitions=competitions)
 
 

@@ -6,7 +6,7 @@ class TestBugBook12:
     competitions = [
         {
             "name": "Competition Test",
-            "date": "2024-04-28 18:00:00",
+            "date": "2025-04-28 18:00:00",
             "numberOfPlaces": "30"
         }
     ]

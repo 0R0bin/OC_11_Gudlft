@@ -70,14 +70,6 @@ def purchasePlaces():
     competition = [c for c in competitions if c['name'] == request.form['competition']][0]
     club = [c for c in clubs if c['name'] == request.form['club']][0]
     placesRequired = int(request.form['places'])
-    # Vérif > 12
-    places_already_booked = count_places[club['name']][competition['name']]['places']
-
-    if placesRequired > 12 or (12 - places_already_booked - placesRequired) < 0:
-        flash('You can\'t take more than 12 places by competition.')
-        return render_template('booking.html', club=club, competition=competition), 400
-    else:
-        count_places[club['name']][competition['name']]['places'] = places_already_booked + placesRequired
 
     # Check Date
     date_time_competition = datetime.strptime(competition['date'], "%Y-%m-%d %H:%M:%S")
@@ -92,8 +84,18 @@ def purchasePlaces():
         flash(f"Vous ne pouvez pas utiliser des points que vous n'avez pas ! Vous avez essayé de commander {placesRequired} places alors que vous n'aviez que {club['points']} points.")
         return render_template('welcome.html', club=club, competitions=competitions), 400
 
+    # Vérif > 12
+    places_already_booked = count_places[club['name']][competition['name']]['places']
+
+    if placesRequired > 12 or (12 - places_already_booked - placesRequired) < 0:
+        flash('You can\'t take more than 12 places by competition.')
+        return render_template('booking.html', club=club, competition=competition), 400
+    else:
+        count_places[club['name']][competition['name']]['places'] = places_already_booked + placesRequired
+
     # Retour OK
-    competition['numberOfPlaces'] = int(competition['numberOfPlaces'])-placesRequired
+    competition['numberOfPlaces'] = int(competition['numberOfPlaces']) - placesRequired
+    club['points'] = int(club['points']) - placesRequired
     flash('Great-booking complete!')
     return render_template('welcome.html', club=club, competitions=competitions)
 

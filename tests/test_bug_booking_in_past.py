@@ -20,12 +20,23 @@ class TestBugBookingInPast:
         }
     ]
 
+    count_places = {
+        "Test club": 
+        {
+            'Competition Test': 
+            {
+                'places': 0
+            },
+        },
+    }
+
     def setup_method(self):
         """
         Replace DB Informations
         """
         personnal_app.competitions = self.competitions
         personnal_app.clubs = self.club
+        personnal_app.count_places = self.count_places
 
     def test_booking_in_past(self):
         """

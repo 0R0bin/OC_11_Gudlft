@@ -52,7 +52,7 @@ def purchasePlaces():
 
     if date_time_competition < now:
         flash('You can\'t book places on a past event.')
-        return render_template('booking.html', club=club, competition=competition)
+        return render_template('booking.html', club=club, competition=competition), 400
     else:
         competition['numberOfPlaces'] = int(competition['numberOfPlaces'])-placesRequired
         flash('Great-booking complete!')

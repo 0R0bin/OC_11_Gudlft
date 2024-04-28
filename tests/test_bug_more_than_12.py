@@ -38,6 +38,9 @@ class TestBugBook12:
         personnal_app.count_places = self.places_booked
 
     def test_book_ok(self):
+        """
+        Test d'une réservation < 12 places
+        """
 
         result = self.client.post(
             "/purchasePlaces",
@@ -51,6 +54,9 @@ class TestBugBook12:
         assert result.status_code == 200
 
     def test_book_12_os(self):
+        """
+        Test d'une réservation > 12 places d'une seule traite
+        """
 
         result = self.client.post(
             "/purchasePlaces",
@@ -64,6 +70,9 @@ class TestBugBook12:
         assert result.status_code == 400
 
     def test_book_12_total(self):
+        """
+        Test d'une réservation > 12 places
+        """
 
         result = self.client.post(
             "/purchasePlaces",

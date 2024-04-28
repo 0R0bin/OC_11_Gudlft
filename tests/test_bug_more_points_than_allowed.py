@@ -4,7 +4,7 @@ from app import app
 
 class TestBugMorePointsThanAllowed:
     client = app.test_client()
-    competition = [
+    competitions = [
         {
             "name": "Competition Test",
             "date": "2024-04-28 18:00:00",
@@ -24,7 +24,7 @@ class TestBugMorePointsThanAllowed:
         """
         Replace DB Informations
         """
-        personnal_app.competitions = self.competition
+        personnal_app.competitions = self.competitions
         personnal_app.clubs = self.club
 
     def test_booking_ok(self):
@@ -36,7 +36,7 @@ class TestBugMorePointsThanAllowed:
             data={
                 "places": self.club[0]["points"],
                 "club": self.club[0]["name"],
-                "competition": self.competition[0]["name"]
+                "competition": self.competitions[0]["name"]
             }
         )
 
@@ -51,7 +51,7 @@ class TestBugMorePointsThanAllowed:
             data={
                 "places": int(self.club[0]["points"]) + 1,
                 "club": self.club[0]["name"],
-                "competition": self.competition[0]["name"]
+                "competition": self.competitions[0]["name"]
             }
         )
 

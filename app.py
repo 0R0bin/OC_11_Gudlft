@@ -64,7 +64,7 @@ def purchasePlaces():
 
     if placesRequired > 12 or (12 - places_already_booked - placesRequired) < 0:
         flash('You can\'t take more than 12 places by competition.')
-        return render_template('booking.html', club=club, competition=competition)
+        return render_template('booking.html', club=club, competition=competition), 400
     else:
         count_places[club['name']][competition['name']]['places'] = places_already_booked + placesRequired
     
